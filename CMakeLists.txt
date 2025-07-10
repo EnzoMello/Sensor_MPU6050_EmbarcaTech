@@ -46,15 +46,20 @@ pico_set_program_version(mpu6050 "0.1")
 pico_enable_stdio_uart(mpu6050 0)
 pico_enable_stdio_usb(mpu6050 1)
 
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/lib/pico-ssd1306")
+
 # Add the standard library to the build
 target_link_libraries(mpu6050
         pico_stdlib
-        hardware_i2c)
+        hardware_i2c
+        hardware_pwm
+        pico-ssd1306)
 
 # Add the standard include files to the build
 target_include_directories(mpu6050 PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/src/mpu6050
+        ${CMAKE_CURRENT_LIST_DIR}/lib/pico-ssd1306
 )
 
 # Add any user requested libraries
